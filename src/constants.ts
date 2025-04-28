@@ -1,0 +1,1 @@
+export const productapi = 'https://stageapi.monkcommerce.app/task/products/search'
