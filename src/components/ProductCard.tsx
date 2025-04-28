@@ -65,7 +65,7 @@ export const ProductCard = ({
             readOnly
           />
           <img
-            src="src/assets/edit-icon.svg"
+            src="edit-icon.svg"
             onClick={() => showListProductModal(productIndex)}
           />
         </div>

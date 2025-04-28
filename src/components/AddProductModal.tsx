@@ -42,12 +42,12 @@ export const AddProductModal = ({
             <div className="modal-header">
               <div>Select Products </div>
               <div onClick={closeProductModal}>
-                <img src="src/assets/cancel-icon.svg" />
+                <img src="cancel-icon.svg" />
               </div>
             </div>
             <div className="input-container">
               <div className="search flex">
-                <img src="src/assets/search-icon.svg" className="mx-[14px]" />
+                <img src="search-icon.svg" className="mx-[14px]" />
                 <input
                   className="search-input"
                   placeholder="Select Product"
