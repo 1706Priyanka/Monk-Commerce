@@ -3,6 +3,9 @@ export interface IProduct {
     title: string;
     image: Record<string, string>;
     variants: IVariant[];
+    discountValue?:number;
+    discountType?:string;
+    showDiscount?:string
   }
   
   export interface IVariant {
@@ -11,6 +14,9 @@ export interface IProduct {
     title: string;
     price: string;
     inventory_quantity: number;
+    discountValue?:number;
+    discountType?:string;
+    showDiscount?:string
   }
 
   export interface ISelectedProduct{
