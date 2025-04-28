@@ -1,14 +1,14 @@
-
 import { useEffect, useState } from "react";
 import { AddProductCard } from "../components/AddProductCard";
 import { useProductContext } from "../context/ProductContext";
 import { AddProductModal } from "../components/AddProductModal";
+import { IProduct, ISelectedProduct, IVariant } from "../types";
 
 export const ProductPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [tempSelectedProduct, setTempSelectedProduct] = useState([]);
-  const [editingProductIndex, setEditingProductIndex] = useState(null);
+  const [tempSelectedProduct, setTempSelectedProduct] = useState<IProduct[]>([]);
+  const [editingProductIndex, setEditingProductIndex] = useState<number | null>(null);
 
   const {
     productData,
@@ -16,9 +16,7 @@ export const ProductPage = () => {
     pageNumber,
     setPageNumber,
     hasMore,
-    setHasMore,
     isEmptySearch,
-    setIsEmptySearch,
     fetchProductList,
     selectedProduct,
     setSelectedProduct,
@@ -53,11 +51,14 @@ export const ProductPage = () => {
     const updatedProducts = uniqueNewProducts.map((product) => ({
       ...product,
       showVariants: true,
-    }));
+      showDiscount: false,
+      discountValue: "",
+      discountType: "% Off"
+    })) as ISelectedProduct[];
 
     if (editingProductIndex !== null) {
       // Editing existing product (could be empty or existing)
-      setSelectedProduct((prev) => [
+      setSelectedProduct((prev: ISelectedProduct[]) => [
         ...prev.slice(0, editingProductIndex),
         ...updatedProducts,
         ...prev.slice(editingProductIndex + 1),
@@ -85,11 +86,14 @@ export const ProductPage = () => {
     if (productIndex === -1) {
       // Product not in selection, add it with the selected variant
       const productToAdd = productData.find((p) => p.id === productId);
+      if (!productToAdd) return;
+
       if (variantId) {
         // Only add the selected variant
         const variantToAdd = productToAdd.variants.find(
           (v) => v.id === variantId
         );
+        if (!variantToAdd) return;
         updatedSelection.push({
           ...productToAdd,
           variants: [
@@ -98,7 +102,7 @@ export const ProductPage = () => {
               showDiscount: false,
               discountValue: "",
               discountType: "% Off",
-            },
+            } as IVariant,
           ],
         });
       } else {
@@ -128,13 +132,13 @@ export const ProductPage = () => {
           // Add variant if not already selected
           const variantToAdd = productData
             .find((p) => p.id === productId)
-            .variants.find((v) => v.id === variantId);
+            ?.variants.find((v) => v.id === variantId);
           updatedSelection[productIndex].variants.push({
             ...variantToAdd,
             showDiscount: false,
             discountValue: "",
             discountType: "% Off",
-          });
+          } as IVariant);
         } else {
           // Remove variant if already selected
           updatedSelection[productIndex].variants.splice(variantIndex, 1);
@@ -149,11 +153,11 @@ export const ProductPage = () => {
     setTempSelectedProduct(updatedSelection);
   }
 
-  const isProductSelected = (productId) => {
+  const isProductSelected = (productId: number) => {
     return tempSelectedProduct?.some((p) => p.id === productId) ?? false;
   };
 
-  const isVariantSelected = (productId, variantId) => {
+  const isVariantSelected = (productId: number, variantId: number) => {
     const product = tempSelectedProduct?.find((p) => p.id === productId);
     return product?.variants?.some((v) => v.id === variantId) ?? false;
   };
@@ -196,13 +200,12 @@ export const ProductPage = () => {
   const moveVariant = (
     fromIndex: number,
     toIndex: number,
-    product: any,
+    product: IProduct,
     productId: number
   ) => {
     const updatedProducts = [...product.variants];
     const [movedItem] = updatedProducts.splice(fromIndex, 1);
     updatedProducts.splice(toIndex, 0, movedItem);
-    console.log(product.variants, "=====", updatedProducts);
     setSelectedProduct((previousItems) =>
       previousItems.map((product) =>
         product.id === productId
@@ -239,3 +242,4 @@ export const ProductPage = () => {
     </>
   );
 };
+

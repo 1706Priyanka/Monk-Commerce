@@ -4,12 +4,12 @@ import { ProductCard } from "./ProductCard";
 import { VariantCard } from "./VariantCard";
 
 interface AddProductCardProps {
-  showListProductModal: () => void;
+  showListProductModal: (index: number) => void;
   moveProduct: (fromIndex: number, toIndex: number) => void;
   moveVariant: (
     fromIndex: number,
     toIndex: number,
-    product: IProduct,
+    product: ISelectedProduct,
     productId: number
   ) => void;
   setEditingProductIndex: (index: number | null) => void;
@@ -31,11 +31,11 @@ export const AddProductCard = ({
     setSelectedProduct((prev) => [
       ...prev,
       {
-        id: null,
+        id: 0,
         title: "",
         variants: [],
         showVariants: false,
-        showDiscount: false, // Add this new property
+        showDiscount: false,
         discountValue: "",
         discountType: "% Off",
       },
@@ -98,7 +98,7 @@ export const AddProductCard = ({
   }
 
   function toggleShowVariantDiscount(productId: number, variantId: number) {
-    setSelectedProduct((prevProducts) =>
+    setSelectedProduct((prevProducts: ISelectedProduct[]) =>
       prevProducts.map((p) => {
         if (p.id === productId) {
           return {
@@ -118,7 +118,7 @@ export const AddProductCard = ({
     variantId: number,
     value: string
   ) {
-    setSelectedProduct((prevProducts) =>
+    setSelectedProduct((prevProducts: ISelectedProduct[]) =>
       prevProducts.map((p) => {
         if (p.id === productId) {
           return {

@@ -1,6 +1,6 @@
 import { useDrag, useDrop } from "react-dnd";
 import { useRef } from "react";
-import { IProduct, IVariant } from "../types";
+import { ISelectedProduct, IVariant } from "../types";
 
 interface DragItem {
   id: number;
@@ -12,10 +12,10 @@ export interface VariantCardProps {
   variant: IVariant;
   toggleShowVariantDiscount: (productId: number, variantId: number) => void;
   handleVariantDiscountChange: (productId: number, variantId: number, value: string) => void;
-  handleVariantDiscountTypeChange: (productId: number, variantId: number, value:  '% Off' | 'Amount Off') => void;
+  handleVariantDiscountTypeChange: (productId: number, variantId: number, value: '% Off' | 'Amount Off') => void;
   handleRemoveVariant: (productId: number, variantId: number) => void;
-  moveVariant: (dragIndex: number, hoverIndex: number, product: IProduct, productId: number) => void;
-  product: IProduct;
+  moveVariant: (dragIndex: number, hoverIndex: number, product: ISelectedProduct, productId: number) => void;
+  product: ISelectedProduct;
   productId: number;
 }
 

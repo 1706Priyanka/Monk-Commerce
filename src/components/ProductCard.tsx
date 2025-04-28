@@ -1,11 +1,11 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';
-import { IProduct } from '../types';
+import { ISelectedProduct } from '../types';
 
 
 interface ProductCardProps {
   productIndex: number;
-  product: IProduct;
+  product: ISelectedProduct;
   showListProductModal: (index: number) => void;
   toggleShowDiscount: (id: number) => void;
   handleDiscountChange: (id: number, value: string) => void;
@@ -65,7 +65,7 @@ export const ProductCard = ({
             readOnly
           />
           <img
-            src="src/assets/edit-icon.svg"
+            src="edit-icon.svg"
             onClick={() => showListProductModal(productIndex)}
           />
         </div>
