@@ -162,17 +162,17 @@ export const AddProductCard = ({
   return (
     <>
       <div className="flex justify-center items-center w-screen h-screen p-4">
-        <div className="flex flex-col items-start h-full w-[55%]">
+        <div className="flex flex-col items-start h-full w-[65%]">
           <h2 className="font-medium text-lg">Add Products</h2>
           <div className="flex justify-between w-full px-[56px] my-4">
             <p className="w-[82%] font-semibold">Product</p>
             <p className="w-[18%] font-semibold">Discount</p>
           </div>
           <div className="w-full">
-            <div className="min-h-[20px] max-h-[calc(100vh-350px)] overflow-y-auto pt-[14px] mb-[36px]">
+            <div className="min-h-[20px] max-h-[calc(100vh-200px)] overflow-y-auto pt-[14px] mb-[36px]">
               {selectedProduct.map(
                 (product: ISelectedProduct, productIndex: number) => (
-                  <div key={productIndex} className="pb-2 mb-2 mr-[10px]">
+                  <div key={productIndex} className="pb-2 mb-2 mr-[20px]">
                     {/* Parent Product Row */}
                     <ProductCard
                       productIndex={productIndex}

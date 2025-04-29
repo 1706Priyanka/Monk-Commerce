@@ -37,7 +37,7 @@ export const AddProductModal = ({
     <>
       {showModal && (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/20 flex justify-center items-center z-[999]">
-          <div className="w-[612px] h-[663px] bg-white z-[1000] rounded-[4px]">
+          <div className="w-[650px] h-[663px] bg-white z-[1000] rounded-[4px]">
             <div className="flex justify-between pt-3.5 pr-3.5 pb-1.5 pl-3.5">
               <div>Select Products </div>
               <div onClick={closeProductModal}>
