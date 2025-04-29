@@ -12,7 +12,7 @@ export interface VariantCardProps {
   variant: IVariant;
   toggleShowVariantDiscount: (productId: number, variantId: number) => void;
   handleVariantDiscountChange: (productId: number, variantId: number, value: string) => void;
-  handleVariantDiscountTypeChange: (productId: number, variantId: number, value: '% Off' | 'Amount Off') => void;
+  handleVariantDiscountTypeChange: (productId: number, variantId: number, value: '% Off' | 'Flat Off') => void;
   handleRemoveVariant: (productId: number, variantId: number) => void;
   moveVariant: (dragIndex: number, hoverIndex: number, product: ISelectedProduct, productId: number) => void;
   product: ISelectedProduct;
@@ -52,24 +52,23 @@ export const VariantCard = ({
   return (
     <div
       key={variantIndex}
-      className="flex items-center justify-between"
+      className="flex w-full gap-4 h-[40px] items-center"
       ref={ref}
-      style={{
-        opacity: isDragging ? 0.95 : 1,
-        border: "1px solid #ccc",
-        padding: "16px",
-        marginBottom: "8px",
-        backgroundColor: "#fff",
-        cursor: "move",
-      }}
     >
+      
+      <div className="flex items-center w-[75%]">
+      <img src="drag-drop-icon.svg" alt="product" className="w-[20px] h-[16px] mr-[12px]"/>
+      <div className='bg-white shadow-sm rounded-[20px] p-[4px_10px]  flex w-full'>
       <input className="search-input" value={variant.title} readOnly />
+      </div>
+      </div>
+      
 
-      <div className="flex items-center">
+      <div className="flex items-center w-[25%]">
         {/* Add Discount Button - Only show if discount isn't visible */}
         {!variant.showDiscount && (
           <button
-            className="add-discount-btn ml-2"
+            className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full"
             onClick={() => toggleShowVariantDiscount(product.id, variant.id)}
           >
             Add Discount
@@ -78,9 +77,9 @@ export const VariantCard = ({
 
         {/* Discount inputs - Only show when showDiscount is true */}
         {variant.showDiscount && (
-          <div className="flex items-center">
+          <div className="flex items-center justify-between gap-4 relative w-full">
             <input
-              className="discount-input"
+              className="outline-transparent bg-white p-1 w-[50%]  shadow-sm rounded-[20px] p-[4px_10px]"
               placeholder="20"
               value={variant.discountValue}
               onChange={(e) =>
@@ -92,29 +91,32 @@ export const VariantCard = ({
               }
             />
             <select
-              className="discount-type ml-2"
+              className="bg-white p-1 w-[50%] shadow-sm rounded-[20px] p-[4px_10px]"
               value={variant.discountType}
               onChange={(e) =>
                 handleVariantDiscountTypeChange(
                   product.id,
                   variant.id,
-                  e.target.value as '% Off' | 'Amount Off'
+                  e.target.value as '% Off' | 'Flat Off'
                 )
               }
             >
               <option>% Off</option>
-              <option>Amount Off</option>
+              <option>Flat Off</option>
             </select>
+
+           
           </div>
         )}
 
-        <button
+        
+      </div>
+      <button
           className="ml-2"
           onClick={() => handleRemoveVariant(product.id, variant.id)}
         >
-          X
+        <img src="cancel-gray-icon.svg" />
         </button>
-      </div>
     </div>
   );
 };

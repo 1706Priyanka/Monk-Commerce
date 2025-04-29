@@ -166,8 +166,9 @@ export const AddProductModal = ({
             <div className="footer">
               <div>{tempSelectedProduct.length} Product selected</div>
               <div className="btn-container">
-                <button onClick={closeProductModal}>Cancel</button>
-                <button className="add-btn" onClick={handleAddProducts}>
+                <button className="
+                w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2" onClick={closeProductModal}>Cancel</button>
+                <button className="bg-[#008060] text-white w-1/2 rounded-md" onClick={handleAddProducts}>
                   Add
                 </button>
               </div>
