@@ -169,10 +169,10 @@ export const AddProductCard = ({
             <p className="w-[18%] font-semibold">Discount</p>
           </div>
           <div className="w-full">
-            <div className="">
+            <div className="min-h-[20px] max-h-[calc(100vh-350px)] overflow-y-auto pt-[14px] mb-[36px]">
               {selectedProduct.map(
                 (product: ISelectedProduct, productIndex: number) => (
-                  <div key={productIndex} className="pb-2 mb-2">
+                  <div key={productIndex} className="pb-2 mb-2 mr-[10px]">
                     {/* Parent Product Row */}
                     <ProductCard
                       productIndex={productIndex}
