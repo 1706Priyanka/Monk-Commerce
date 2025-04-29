@@ -60,7 +60,6 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
         }
       )
       .then((data) => {
-        console.log(data);
         if (isLoadMore) {
           setProductData((prevData) => [...prevData, ...data.data]);
         } else {

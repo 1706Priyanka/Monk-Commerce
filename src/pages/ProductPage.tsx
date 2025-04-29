@@ -163,7 +163,6 @@ export const ProductPage = () => {
   };
 
   useEffect(() => {
-    console.log(selectedProduct);
   }, [selectedProduct]);
 
   useEffect(() => {
@@ -183,7 +182,6 @@ export const ProductPage = () => {
 
     // Calculate next page first
     const nextPage = pageNumber + 1;
-    console.log(nextPage);
 
     // Update state and fetch in the correct order
     setPageNumber(nextPage);

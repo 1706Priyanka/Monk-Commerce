@@ -37,19 +37,19 @@ export const AddProductModal = ({
   return (
     <>
       {showModal && (
-        <div className="modal-overlay">
-          <div className="h-[663px] w-[612px] modal-container">
-            <div className="modal-header">
+        <div className="fixed top-0 left-0 w-screen h-screen bg-black/20 flex justify-center items-center z-[999]">
+          <div className="w-[612px] h-[663px] bg-white z-[1000] rounded-[4px]">
+            <div className="flex justify-between pt-3.5 pr-3.5 pb-1.5 pl-3.5">
               <div>Select Products </div>
               <div onClick={closeProductModal}>
                 <img src="cancel-icon.svg" />
               </div>
             </div>
-            <div className="input-container">
-              <div className="search flex">
+            <div className="border-t border-b border-black/10">
+              <div className="border border-black/10 w-full md:w-[92%] mx-2 md:mx-5 my-1 md:my-2.5 p-0.5 md:p-1 flex">
                 <img src="search-icon.svg" className="mx-[14px]" />
                 <input
-                  className="search-input"
+                  className="w-full outline-none placeholder-gray-400"
                   placeholder="Select Product"
                   value={searchTerm}
                   type="text"
@@ -61,7 +61,7 @@ export const AddProductModal = ({
             </div>
 
             <div
-              className="overflow-auto product-list-container"
+              className="overflow-auto my-2 h-[300px] sm:h-[400px] md:h-[492px]"
               id="scrollableDiv"
             >
               <InfiniteScroll
@@ -83,19 +83,19 @@ export const AddProductModal = ({
                 {productData?.length > 0 ? (
                   productData?.map((item: IProduct, index: number) => (
                     <div key={index}>
-                      <div className="parent-item flex">
+                      <div className="border-b border-black/10 pb-3 pl-6 pr-3 pt-3 flex">
                         <input
                           checked={isProductSelected(item?.id)}
                           onChange={() => {
                             handleOnSelection(item.id, null);
                           }}
-                          className="checkbox"
+                          className="h-5 w-5 mr-3.5 [accent-color:#008060]"
                           type="checkbox"
                         />
 
                         {item?.image?.src && (
                           <img
-                            className="image-size"
+                            className="h-[26px] w-[28px] rounded mr-3.5"
                             src={item.image.src}
                             alt={item.title}
                           />
@@ -106,7 +106,7 @@ export const AddProductModal = ({
                       {item?.variants?.map(
                         (variant: IVariant, index: number) => (
                           <div
-                            className="child-items flex justify-between w-full"
+                            className="border-b border-black/10 pt-3 pr-3 pb-3 pl-[62px] flex justify-between w-full"
                             key={index}
                           >
                             <div className="flex items-center w-[55%]">
@@ -115,9 +115,8 @@ export const AddProductModal = ({
                                 onChange={() => {
                                   handleOnSelection(item.id, variant.id);
                                 }}
-                                className="checkbox"
+                                className="h-5 w-5 mr-3.5 [accent-color:#008060]"
                                 type="checkbox"
-                                disabled={variant?.inventory_quantity <= 0}
                               />
                               <p
                                 className={
@@ -163,9 +162,9 @@ export const AddProductModal = ({
               </InfiniteScroll>
             </div>
 
-            <div className="footer">
+            <div className="flex justify-between m-5">
               <div>{tempSelectedProduct.length} Product selected</div>
-              <div className="btn-container">
+              <div className="flex justify-evenly w-full sm:w-1/2 md:w-[32%]">
                 <button className="
                 w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2" onClick={closeProductModal}>Cancel</button>
                 <button className="bg-[#008060] text-white w-1/2 rounded-md" onClick={handleAddProducts}>

@@ -26,6 +26,10 @@ export const AddProductCard = ({
   const { selectedProduct, setSelectedProduct } = useProductContext();
 
   function addProduct() {
+    const lastProduct = selectedProduct[selectedProduct.length - 1];
+    if (lastProduct && !lastProduct.title && lastProduct.variants.length === 0) {
+      return;
+    }
     setSelectedProduct((prev) => [
       ...prev,
       {
@@ -155,7 +159,7 @@ export const AddProductCard = ({
     <>
       <div className="flex justify-center items-center w-screen h-screen p-4">
         <div className="flex flex-col items-start h-full w-[55%]">
-          <h2 className="add-product-title">Add Products</h2>
+          <h2 className="font-medium text-lg">Add Products</h2>
           <div className="flex justify-between w-full px-[56px] my-4">
             <p className="w-[82%] font-semibold">Product</p>
             <p className="w-[18%] font-semibold">Discount</p>
@@ -182,7 +186,7 @@ export const AddProductCard = ({
                     {product?.variants?.length > 0 && (
                       <>
                         <div
-                          className="text-blue-500 cursor-pointer ml-6 mt-1 text-sm flex justify-end"
+                          className="text-blue-500 cursor-pointer ml-6 pt-4 text-sm flex justify-end"
                           onClick={() => toggleShowVariants(product.id)}
                         >
                           {product.showVariants
