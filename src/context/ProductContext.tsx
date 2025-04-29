@@ -28,7 +28,6 @@ const ProductContext = createContext<IProductContext>({
   setPageNumber: () => {},
   hasMore: true,
   setHasMore: () => {},
-  isEmptySearch: false,
   fetchProductList: () => {},
   selectedProduct: [],
   setSelectedProduct: () => {},
@@ -36,6 +35,7 @@ const ProductContext = createContext<IProductContext>({
 
 // 2. Create Provider
 export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
+  const apiKey = import.meta.env.VITE_API_KEY
   const [productData, setProductData] = useState<IProduct[]>([]);
   const [pageNumber, setPageNumber] = useState(1); 
   const [hasMore, setHasMore] = useState(true);
@@ -52,7 +52,7 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
           ? `https://stageapi.monkcommerce.app/task/products/search?search=${search}&page=${page}&limit=10`
           : `${productapi}?page=${page}&limit=10`,
         {
-          headers: { "x-api-key": "72njgfa948d9aS7gs5" },
+          headers: { "x-api-key": apiKey },
         }
       )
       .then((data) => {
