@@ -11,8 +11,6 @@ interface IProductContext {
   setPageNumber: React.Dispatch<React.SetStateAction<number>>;
   hasMore: boolean;
   setHasMore: React.Dispatch<React.SetStateAction<boolean>>;
-  isEmptySearch: boolean;
-  setIsEmptySearch: React.Dispatch<React.SetStateAction<boolean>>;
   fetchProductList: (search?: string, isLoadMore?: boolean, page?: number) => void;
   selectedProduct: ISelectedProduct[];
   setSelectedProduct: React.Dispatch<React.SetStateAction<ISelectedProduct[]>>;
@@ -31,7 +29,6 @@ const ProductContext = createContext<IProductContext>({
   hasMore: true,
   setHasMore: () => {},
   isEmptySearch: false,
-  setIsEmptySearch: () => {},
   fetchProductList: () => {},
   selectedProduct: [],
   setSelectedProduct: () => {},
@@ -42,7 +39,6 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
   const [productData, setProductData] = useState<IProduct[]>([]);
   const [pageNumber, setPageNumber] = useState(1); 
   const [hasMore, setHasMore] = useState(true);
-  const [isEmptySearch, setIsEmptySearch] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ISelectedProduct[]>([]);
 
   const fetchProductList = (
@@ -65,8 +61,7 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
         } else {
           setProductData(data.data);
         }
-        setHasMore(data.data.length === 10);
-        setIsEmptySearch(data.data.length === 0 && search !== "");
+        setHasMore(data?.data?.length === 10);
       })
       .catch(console.error);
   };
@@ -79,8 +74,6 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
       setPageNumber,
       hasMore,
       setHasMore,
-      isEmptySearch,
-      setIsEmptySearch, 
       fetchProductList,
       selectedProduct, 
       setSelectedProduct 

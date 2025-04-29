@@ -1,8 +1,6 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import { IProduct, IVariant } from "../types";
 
-
-
 interface AddProductModalProps {
   showModal: boolean;
   closeProductModal: () => void;
@@ -14,7 +12,6 @@ interface AddProductModalProps {
   isProductSelected: (productId: number) => boolean;
   handleOnSelection: (productId: number, variantId: number | null) => void;
   isVariantSelected: (productId: number, variantId: number) => boolean;
-  isEmptySearch: boolean;
   tempSelectedProduct: IProduct[];
   handleAddProducts: () => void;
 }
@@ -30,19 +27,21 @@ export const AddProductModal = ({
   isProductSelected,
   handleOnSelection,
   isVariantSelected,
-  isEmptySearch,
   tempSelectedProduct,
   handleAddProducts,
 }: AddProductModalProps) => {
+  const hasNegativeInventoryVariant = (product: IProduct) => {
+    return product.variants?.some(variant => variant.inventory_quantity < 0);
+  };
   return (
     <>
       {showModal && (
         <div className="fixed top-0 left-0 w-screen h-screen bg-black/20 flex justify-center items-center z-[999]">
-          <div className="w-[612px] h-[663px] bg-white z-[1000] rounded-[4px]">
+          <div className="w-[650px] h-[663px] bg-white z-[1000] rounded-[4px]">
             <div className="flex justify-between pt-3.5 pr-3.5 pb-1.5 pl-3.5">
               <div>Select Products </div>
               <div onClick={closeProductModal}>
-                <img src="cancel-icon.svg" />
+                <img src="cancel-icon.svg" className="cursor-pointer" />
               </div>
             </div>
             <div className="border-t border-b border-black/10">
@@ -61,7 +60,7 @@ export const AddProductModal = ({
             </div>
 
             <div
-              className="overflow-auto my-2 h-[300px] sm:h-[400px] md:h-[492px]"
+              className="overflow-auto my-2 md:h-[492px]"
               id="scrollableDiv"
             >
               <InfiniteScroll
@@ -71,7 +70,7 @@ export const AddProductModal = ({
                 scrollableTarget="scrollableDiv"
                 loader={
                   <div className="flex w-full h-full justify-center items-center py-3">
-                    Loading...
+                    Loading Products...
                   </div>
                 }
                 endMessage={
@@ -84,23 +83,30 @@ export const AddProductModal = ({
                   productData?.map((item: IProduct, index: number) => (
                     <div key={index}>
                       <div className="border-b border-black/10 pb-3 pl-6 pr-3 pt-3 flex">
-                        <input
-                          checked={isProductSelected(item?.id)}
-                          onChange={() => {
+                      <input
+                        checked={isProductSelected(item?.id)}
+                        onChange={() => {
+                          if (!hasNegativeInventoryVariant(item)) {
                             handleOnSelection(item.id, null);
-                          }}
-                          className="h-5 w-5 mr-3.5 [accent-color:#008060]"
-                          type="checkbox"
-                        />
+                          }
+                        }}
+                        className={`h-5 w-5 mr-3.5 [accent-color:#008060] ${
+                          hasNegativeInventoryVariant(item) ? 'opacity-50 cursor-not-allowed' : ''
+                        }`}
+                        type="checkbox"
+                        disabled={hasNegativeInventoryVariant(item)}
+                      />
 
-                        {item?.image?.src && (
-                          <img
-                            className="h-[26px] w-[28px] rounded mr-3.5"
-                            src={item.image.src}
-                            alt={item.title}
-                          />
-                        )}
-                        {item?.title}
+                      {item?.image?.src && (
+                        <img
+                          className="h-[26px] w-[28px] rounded mr-3.5"
+                          src={item.image.src}
+                          alt={item.title}
+                        />
+                      )}
+                         <span className={hasNegativeInventoryVariant(item) ? "text-gray-400" : ""}>
+                          {item?.title}
+                        </span>
                       </div>
 
                       {item?.variants?.map(
@@ -117,6 +123,7 @@ export const AddProductModal = ({
                                 }}
                                 className="h-5 w-5 mr-3.5 [accent-color:#008060]"
                                 type="checkbox"
+                                disabled={variant?.inventory_quantity <= 0}
                               />
                               <p
                                 className={
@@ -154,11 +161,7 @@ export const AddProductModal = ({
                       )}
                     </div>
                   ))
-                ) : !isEmptySearch ? (
-                  <div className="flex justify-center items-center py-3">
-                    Loading products...
-                  </div>
-                ) : null}
+                )  : null}
               </InfiniteScroll>
             </div>
 
@@ -166,8 +169,8 @@ export const AddProductModal = ({
               <div>{tempSelectedProduct.length} Product selected</div>
               <div className="flex justify-evenly w-full sm:w-1/2 md:w-[32%]">
                 <button className="
-                w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2" onClick={closeProductModal}>Cancel</button>
-                <button className="bg-[#008060] text-white w-1/2 rounded-md" onClick={handleAddProducts}>
+                w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2 cursor-pointer" onClick={closeProductModal}>Cancel</button>
+                <button className="bg-[#008060] text-white w-1/2 rounded-md cursor-pointer "  onClick={handleAddProducts}>
                   Add
                 </button>
               </div>

@@ -27,7 +27,11 @@ export const AddProductCard = ({
 
   function addProduct() {
     const lastProduct = selectedProduct[selectedProduct.length - 1];
-    if (lastProduct && !lastProduct.title && lastProduct.variants.length === 0) {
+    if (
+      lastProduct &&
+      !lastProduct.title &&
+      lastProduct.variants.length === 0
+    ) {
       return;
     }
     setSelectedProduct((prev) => [
@@ -158,17 +162,17 @@ export const AddProductCard = ({
   return (
     <>
       <div className="flex justify-center items-center w-screen h-screen p-4">
-        <div className="flex flex-col items-start h-full w-[55%]">
+        <div className="flex flex-col items-start h-full w-[65%]">
           <h2 className="font-medium text-lg">Add Products</h2>
           <div className="flex justify-between w-full px-[56px] my-4">
             <p className="w-[82%] font-semibold">Product</p>
             <p className="w-[18%] font-semibold">Discount</p>
           </div>
           <div className="w-full">
-            <div className="">
+            <div className="min-h-[20px] max-h-[calc(100vh-200px)] overflow-y-auto pt-[14px] mb-[36px]">
               {selectedProduct.map(
                 (product: ISelectedProduct, productIndex: number) => (
-                  <div key={productIndex} className="pb-2 mb-2">
+                  <div key={productIndex} className="pb-2 mb-2 mr-[20px]">
                     {/* Parent Product Row */}
                     <ProductCard
                       productIndex={productIndex}
@@ -186,39 +190,43 @@ export const AddProductCard = ({
                     {product?.variants?.length > 0 && (
                       <>
                         <div
-                          className="text-blue-500 cursor-pointer ml-6 pt-4 text-sm flex justify-end"
+                          className="text-blue-500 cursor-pointer ml-6 pt-[4px] text-sm flex justify-end"
                           onClick={() => toggleShowVariants(product.id)}
                         >
-                          {product.showVariants
+                          {product?.showVariants
                             ? "Hide variants ▲"
                             : "View variants ▼"}
                         </div>
-                        {product.showVariants && (
-                          <div className="ml-8 mt-2 flex flex-col gap-2">
-                            {product.variants.map(
-                              (variant: IVariant, variantIndex: number) => (
-                                <VariantCard
-                                  key={variant.id} // Added key prop
-                                  variantIndex={variantIndex}
-                                  variant={variant}
-                                  toggleShowVariantDiscount={
-                                    toggleShowVariantDiscount
-                                  }
-                                  handleVariantDiscountChange={
-                                    handleVariantDiscountChange
-                                  }
-                                  handleVariantDiscountTypeChange={
-                                    handleVariantDiscountTypeChange
-                                  }
-                                  handleRemoveVariant={handleRemoveVariant}
-                                  moveVariant={moveVariant}
-                                  product={product}
-                                  productId={product.id}
-                                />
-                              )
-                            )}
-                          </div>
-                        )}
+                        <div
+                          className={`ml-8 mt-2 flex flex-col gap-2 transition-all duration-300 ease-in-out overflow-hidden ${
+                            product.showVariants
+                              ? "max-h-[1000px] opacity-100"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          {product.variants.map(
+                            (variant: IVariant, variantIndex: number) => (
+                              <VariantCard
+                                key={variant.id}
+                                variantIndex={variantIndex}
+                                variant={variant}
+                                toggleShowVariantDiscount={
+                                  toggleShowVariantDiscount
+                                }
+                                handleVariantDiscountChange={
+                                  handleVariantDiscountChange
+                                }
+                                handleVariantDiscountTypeChange={
+                                  handleVariantDiscountTypeChange
+                                }
+                                handleRemoveVariant={handleRemoveVariant}
+                                moveVariant={moveVariant}
+                                product={product}
+                                productId={product.id}
+                              />
+                            )
+                          )}
+                        </div>
                       </>
                     )}
                   </div>

@@ -16,7 +16,6 @@ export const ProductPage = () => {
     pageNumber,
     setPageNumber,
     hasMore,
-    isEmptySearch,
     fetchProductList,
     selectedProduct,
     setSelectedProduct,
@@ -50,7 +49,7 @@ export const ProductPage = () => {
 
     const updatedProducts = uniqueNewProducts.map((product) => ({
       ...product,
-      showVariants: true,
+      showVariants: false,
       showDiscount: false,
       discountValue: "",
       discountType: "% Off"
@@ -170,7 +169,7 @@ export const ProductPage = () => {
       if (searchTerm.trim() !== "") {
         fetchProductList(searchTerm);
       } else {
-        // fetchProductList()
+        fetchProductList()
       }
     }, 500);
 
@@ -233,7 +232,6 @@ export const ProductPage = () => {
         isProductSelected={isProductSelected}
         handleOnSelection={handleOnSelection}
         isVariantSelected={isVariantSelected}
-        isEmptySearch={isEmptySearch}
         tempSelectedProduct={tempSelectedProduct}
         handleAddProducts={handleAddProducts}
       />
