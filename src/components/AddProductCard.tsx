@@ -27,7 +27,11 @@ export const AddProductCard = ({
 
   function addProduct() {
     const lastProduct = selectedProduct[selectedProduct.length - 1];
-    if (lastProduct && !lastProduct.title && lastProduct.variants.length === 0) {
+    if (
+      lastProduct &&
+      !lastProduct.title &&
+      lastProduct.variants.length === 0
+    ) {
       return;
     }
     setSelectedProduct((prev) => [
@@ -189,36 +193,40 @@ export const AddProductCard = ({
                           className="text-blue-500 cursor-pointer ml-6 pt-[4px] text-sm flex justify-end"
                           onClick={() => toggleShowVariants(product.id)}
                         >
-                          {product.showVariants
+                          {product?.showVariants
                             ? "Hide variants ▲"
                             : "View variants ▼"}
                         </div>
-                        {product.showVariants && (
-                          <div className="ml-8 mt-2 flex flex-col gap-2">
-                            {product.variants.map(
-                              (variant: IVariant, variantIndex: number) => (
-                                <VariantCard
-                                  key={variant.id} // Added key prop
-                                  variantIndex={variantIndex}
-                                  variant={variant}
-                                  toggleShowVariantDiscount={
-                                    toggleShowVariantDiscount
-                                  }
-                                  handleVariantDiscountChange={
-                                    handleVariantDiscountChange
-                                  }
-                                  handleVariantDiscountTypeChange={
-                                    handleVariantDiscountTypeChange
-                                  }
-                                  handleRemoveVariant={handleRemoveVariant}
-                                  moveVariant={moveVariant}
-                                  product={product}
-                                  productId={product.id}
-                                />
-                              )
-                            )}
-                          </div>
-                        )}
+                        <div
+                          className={`ml-8 mt-2 flex flex-col gap-2 transition-all duration-300 ease-in-out overflow-hidden ${
+                            product.showVariants
+                              ? "max-h-[1000px] opacity-100"
+                              : "max-h-0 opacity-0"
+                          }`}
+                        >
+                          {product.variants.map(
+                            (variant: IVariant, variantIndex: number) => (
+                              <VariantCard
+                                key={variant.id}
+                                variantIndex={variantIndex}
+                                variant={variant}
+                                toggleShowVariantDiscount={
+                                  toggleShowVariantDiscount
+                                }
+                                handleVariantDiscountChange={
+                                  handleVariantDiscountChange
+                                }
+                                handleVariantDiscountTypeChange={
+                                  handleVariantDiscountTypeChange
+                                }
+                                handleRemoveVariant={handleRemoveVariant}
+                                moveVariant={moveVariant}
+                                product={product}
+                                productId={product.id}
+                              />
+                            )
+                          )}
+                        </div>
                       </>
                     )}
                   </div>

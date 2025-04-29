@@ -169,8 +169,8 @@ export const AddProductModal = ({
               <div>{tempSelectedProduct.length} Product selected</div>
               <div className="flex justify-evenly w-full sm:w-1/2 md:w-[32%]">
                 <button className="
-                w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2" onClick={closeProductModal}>Cancel</button>
-                <button className="bg-[#008060] text-white w-1/2 rounded-md" onClick={handleAddProducts}>
+                w-1/2 border border-gray-400 text-gray-500 rounded-md mr-2 cursor-pointer" onClick={closeProductModal}>Cancel</button>
+                <button className="bg-[#008060] text-white w-1/2 rounded-md cursor-pointer "  onClick={handleAddProducts}>
                   Add
                 </button>
               </div>

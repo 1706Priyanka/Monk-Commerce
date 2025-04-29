@@ -81,6 +81,8 @@ export const VariantCard = ({
             <input
               className="outline-transparent bg-white p-1 w-[50%]  shadow-sm rounded-[20px] p-[4px_10px] placeholder-gray-400"
               placeholder="20"
+              type="number"
+              min={0}
               value={variant.discountValue}
               onChange={(e) =>
                 handleVariantDiscountChange(

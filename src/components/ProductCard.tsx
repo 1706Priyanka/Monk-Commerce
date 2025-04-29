@@ -82,6 +82,8 @@ export const ProductCard = ({
               <input
                 className="outline-transparent bg-white p-1 w-1/3  shadow-sm rounded-sm placeholder-gray-400"
                 placeholder="20"
+                type="number"
+                min={0}
                 value={product.discountValue}
                 onChange={(e) =>
                   handleDiscountChange(product.id, e.target.value)

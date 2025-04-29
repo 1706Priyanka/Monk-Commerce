@@ -49,7 +49,7 @@ export const ProductPage = () => {
 
     const updatedProducts = uniqueNewProducts.map((product) => ({
       ...product,
-      showVariants: true,
+      showVariants: false,
       showDiscount: false,
       discountValue: "",
       discountType: "% Off"
