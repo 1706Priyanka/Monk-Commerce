@@ -23,9 +23,7 @@ export const AddProductCard = ({
   setEditingProductIndex,
   setTempSelectedProduct,
 }: AddProductCardProps) => {
-  const { selectedProduct, setSelectedProduct }  = useProductContext();
-
-
+  const { selectedProduct, setSelectedProduct } = useProductContext();
 
   function addProduct() {
     setSelectedProduct((prev) => [
@@ -155,70 +153,87 @@ export const AddProductCard = ({
 
   return (
     <>
-      <h2 className="add-product-title">Add Products</h2>
-      <div className="selected-products">
-        {selectedProduct.map((product:ISelectedProduct, productIndex:number) => (
-          <div key={productIndex} className="border-b pb-2 mb-2">
-            {/* Parent Product Row */}
-            <ProductCard
-              productIndex={productIndex}
-              product={product}
-              showListProductModal={showListProductModal}
-              toggleShowDiscount={toggleShowDiscount}
-              handleDiscountChange={handleDiscountChange}
-              handleDiscountTypeChange={handleDiscountTypeChange}
-              handleRemoveProduct={handleRemoveProduct}
-              moveProduct={moveProduct}
-            />
-
-            {/* Toggle to show/hide variants */}
-            {/* Only show variant toggle if product has variants */}
-            {product?.variants?.length > 0 && (
-              <div
-                className="text-blue-500 cursor-pointer ml-6 mt-1 text-sm"
-                onClick={() => toggleShowVariants(product.id)}
-              >
-                {product.showVariants ? "Hide variants ▲" : "View variants ▼"}
-              </div>
-            )}
-
-            {/* Child Variant Rows */}
-            {product.showVariants && (
-              <div className="ml-8 mt-2 flex flex-col gap-2">
-                {product.variants.map((variant:IVariant, variantIndex:number) => {
-                  return (
-                    <VariantCard
-                      variantIndex={variantIndex}
-                      variant={variant}
-                      toggleShowVariantDiscount={toggleShowVariantDiscount}
-                      handleVariantDiscountChange={handleVariantDiscountChange}
-                      handleVariantDiscountTypeChange={
-                        handleVariantDiscountTypeChange
-                      }
-                      handleRemoveVariant={handleRemoveVariant}
-                      moveVariant={moveVariant}
-                      product={product}
-                      productId={product.id}
-                    />
-                  );
-                })}
-              </div>
-            )}
+      <div className="flex justify-center items-center w-screen h-screen p-4">
+        <div className="flex flex-col items-start h-full w-[55%]">
+          <h2 className="add-product-title">Add Products</h2>
+          <div className="flex justify-between w-full px-[56px] my-4">
+            <p className="w-[82%] font-semibold">Product</p>
+            <p className="w-[18%] font-semibold">Discount</p>
           </div>
-        ))}
-      </div>
+          <div className="w-full">
+            <div className="">
+              {selectedProduct.map(
+                (product: ISelectedProduct, productIndex: number) => (
+                  <div key={productIndex} className="pb-2 mb-2">
+                    {/* Parent Product Row */}
+                    <ProductCard
+                      productIndex={productIndex}
+                      product={product}
+                      showListProductModal={showListProductModal}
+                      toggleShowDiscount={toggleShowDiscount}
+                      handleDiscountChange={handleDiscountChange}
+                      handleDiscountTypeChange={handleDiscountTypeChange}
+                      handleRemoveProduct={handleRemoveProduct}
+                      moveProduct={moveProduct}
+                    />
 
-      <div>
-        <button
-          className="add-product-btn"
-          onClick={() => {
-            setEditingProductIndex(null);
-            setTempSelectedProduct([]); 
-            addProduct();
-          }}
-        >
-          Add Product
-        </button>
+                    {/* Toggle to show/hide variants */}
+                    {/* Only show variant toggle if product has variants */}
+                    {product?.variants?.length > 0 && (
+                      <>
+                        <div
+                          className="text-blue-500 cursor-pointer ml-6 mt-1 text-sm flex justify-end"
+                          onClick={() => toggleShowVariants(product.id)}
+                        >
+                          {product.showVariants
+                            ? "Hide variants ▲"
+                            : "View variants ▼"}
+                        </div>
+                        {product.showVariants && (
+                          <div className="ml-8 mt-2 flex flex-col gap-2">
+                            {product.variants.map(
+                              (variant: IVariant, variantIndex: number) => (
+                                <VariantCard
+                                  key={variant.id} // Added key prop
+                                  variantIndex={variantIndex}
+                                  variant={variant}
+                                  toggleShowVariantDiscount={
+                                    toggleShowVariantDiscount
+                                  }
+                                  handleVariantDiscountChange={
+                                    handleVariantDiscountChange
+                                  }
+                                  handleVariantDiscountTypeChange={
+                                    handleVariantDiscountTypeChange
+                                  }
+                                  handleRemoveVariant={handleRemoveVariant}
+                                  moveVariant={moveVariant}
+                                  product={product}
+                                  productId={product.id}
+                                />
+                              )
+                            )}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                )
+              )}
+            </div>
+
+            <button
+              className="text-[#008060] border-2 border-[#008060] rounded-sm bg-[#F6F6F8] float-right h-9 w-[200px] cursor-pointer self-end font-bold"
+              onClick={() => {
+                setEditingProductIndex(null);
+                setTempSelectedProduct([]);
+                addProduct();
+              }}
+            >
+              Add Product
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

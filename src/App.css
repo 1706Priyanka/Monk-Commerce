@@ -1,5 +1,5 @@
 #root {
-  padding: 2rem;
+
 }
 
 .modal-overlay {
@@ -90,11 +90,6 @@
 .child-items{
   padding: 12px 12px 12px 62px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.add-btn{
-  background-color: #008060;
-  color: #FFFFFF;
 }
 
 .search-input{
