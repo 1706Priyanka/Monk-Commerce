@@ -20,7 +20,6 @@ interface ProductProviderProps {
   children: ReactNode;
 }
 
-// 1. Create Context with default value
 const ProductContext = createContext<IProductContext>({
   productData: [],
   setProductData: () => {},
@@ -33,7 +32,6 @@ const ProductContext = createContext<IProductContext>({
   setSelectedProduct: () => {},
 });
 
-// 2. Create Provider
 export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
   const apiKey = import.meta.env.VITE_API_KEY
   const [productData, setProductData] = useState<IProduct[]>([]);
@@ -83,5 +81,4 @@ export const ProductProvider: React.FC<ProductProviderProps> = ({ children }) =>
   );
 };
 
-// 3. Custom Hook for easy usage
 export const useProductContext = () => useContext(ProductContext);

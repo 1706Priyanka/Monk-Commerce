@@ -14,6 +14,7 @@ interface AddProductModalProps {
   isVariantSelected: (productId: number, variantId: number) => boolean;
   tempSelectedProduct: IProduct[];
   handleAddProducts: () => void;
+  getSearchProduct: (searchText:string) =>void;
 }
 
 export const AddProductModal = ({
@@ -29,6 +30,7 @@ export const AddProductModal = ({
   isVariantSelected,
   tempSelectedProduct,
   handleAddProducts,
+  getSearchProduct
 }: AddProductModalProps) => {
   const hasNegativeInventoryVariant = (product: IProduct) => {
     return product.variants?.some(variant => variant.inventory_quantity < 0);
@@ -54,6 +56,7 @@ export const AddProductModal = ({
                   type="text"
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
+                    getSearchProduct(e.target.value)
                   }}
                 />
               </div>

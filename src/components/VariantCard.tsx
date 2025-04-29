@@ -106,8 +106,6 @@ export const VariantCard = ({
               <option>% Off</option>
               <option>Flat Off</option>
             </select>
-
-           
           </div>
         )}
 
