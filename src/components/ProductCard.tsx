@@ -54,7 +54,7 @@ export const ProductCard = ({
           <span className="mr-2">{productIndex + 1}.</span>
           <div className="flex bg-white p-1 shadow-sm rounded-sm w-full">
             <input
-              className="search-input"
+              className="w-full outline-none placeholder-gray-400"
               value={product.title}
               placeholder="Select Product"
               readOnly
@@ -79,7 +79,7 @@ export const ProductCard = ({
           {product.showDiscount && (
             <div className="flex items-center justify-between gap-4 relative">
               <input
-                className="outline-transparent bg-white p-1 w-1/3  shadow-sm rounded-sm"
+                className="outline-transparent bg-white p-1 w-1/3  shadow-sm rounded-sm placeholder-gray-400"
                 placeholder="20"
                 value={product.discountValue}
                 onChange={(e) =>

@@ -59,7 +59,7 @@ export const VariantCard = ({
       <div className="flex items-center w-[75%]">
       <img src="drag-drop-icon.svg" alt="product" className="w-[20px] h-[16px] mr-[12px]"/>
       <div className='bg-white shadow-sm rounded-[20px] p-[4px_10px]  flex w-full'>
-      <input className="search-input" value={variant.title} readOnly />
+      <input className="w-full outline-none" value={variant.title} readOnly />
       </div>
       </div>
       
@@ -79,7 +79,7 @@ export const VariantCard = ({
         {variant.showDiscount && (
           <div className="flex items-center justify-between gap-4 relative w-full">
             <input
-              className="outline-transparent bg-white p-1 w-[50%]  shadow-sm rounded-[20px] p-[4px_10px]"
+              className="outline-transparent bg-white p-1 w-[50%]  shadow-sm rounded-[20px] p-[4px_10px] placeholder-gray-400"
               placeholder="20"
               value={variant.discountValue}
               onChange={(e) =>
