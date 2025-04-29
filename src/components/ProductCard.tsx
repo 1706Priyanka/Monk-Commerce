@@ -49,7 +49,7 @@ export const ProductCard = ({
           <img
             src="drag-drop-icon.svg"
             alt="product"
-            className="w-[20px] h-[16px] mr-[12px]"
+            className="w-[20px] h-[16px] mr-[12px] cursor-grab"
           />
           <span className="mr-2">{productIndex + 1}.</span>
           <div className="flex bg-white p-1 shadow-sm rounded-sm w-full">
@@ -62,6 +62,7 @@ export const ProductCard = ({
             <img
               src="edit-icon.svg"
               onClick={() => showListProductModal(productIndex)}
+              className="cursor-pointer"
             />
           </div>
         </div>
@@ -69,7 +70,7 @@ export const ProductCard = ({
         <div className="flex-2 w-[25%]">
           {!product.showDiscount && (
             <button
-              className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full"
+              className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full cursor-pointer"
               onClick={() => toggleShowDiscount(product.id)}
             >
               Add Discount
@@ -107,7 +108,7 @@ export const ProductCard = ({
           className="ml-2"
           onClick={() => handleRemoveProduct(product.id)}
         >
-          <img src="cancel-gray-icon.svg" />
+          <img src="cancel-gray-icon.svg"  className="cursor-pointer" />
         </button>
       </div>
     </>

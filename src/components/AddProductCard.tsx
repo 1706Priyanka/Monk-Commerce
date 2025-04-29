@@ -186,7 +186,7 @@ export const AddProductCard = ({
                     {product?.variants?.length > 0 && (
                       <>
                         <div
-                          className="text-blue-500 cursor-pointer ml-6 pt-4 text-sm flex justify-end"
+                          className="text-blue-500 cursor-pointer ml-6 pt-[4px] text-sm flex justify-end"
                           onClick={() => toggleShowVariants(product.id)}
                         >
                           {product.showVariants

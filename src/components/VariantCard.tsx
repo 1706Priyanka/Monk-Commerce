@@ -57,7 +57,7 @@ export const VariantCard = ({
     >
       
       <div className="flex items-center w-[75%]">
-      <img src="drag-drop-icon.svg" alt="product" className="w-[20px] h-[16px] mr-[12px]"/>
+      <img src="drag-drop-icon.svg" alt="product" className="w-[20px] h-[16px] mr-[12px] cursor-grab "/>
       <div className='bg-white shadow-sm rounded-[20px] p-[4px_10px]  flex w-full'>
       <input className="w-full outline-none" value={variant.title} readOnly />
       </div>
@@ -68,7 +68,7 @@ export const VariantCard = ({
         {/* Add Discount Button - Only show if discount isn't visible */}
         {!variant.showDiscount && (
           <button
-            className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full"
+            className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full cursor-pointer"
             onClick={() => toggleShowVariantDiscount(product.id, variant.id)}
           >
             Add Discount
@@ -115,7 +115,7 @@ export const VariantCard = ({
           className="ml-2"
           onClick={() => handleRemoveVariant(product.id, variant.id)}
         >
-        <img src="cancel-gray-icon.svg" />
+        <img src="cancel-gray-icon.svg" className="cursor-pointer" />
         </button>
     </div>
   );
