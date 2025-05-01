@@ -187,7 +187,8 @@ export const AddProductCard = ({
 
                     {/* Toggle to show/hide variants */}
                     {/* Only show variant toggle if product has variants */}
-                    {product?.variants?.length > 0 && (
+                    {/* Only show variant toggle if product has more than one variant */}
+                    {product?.variants?.length > 1 && (
                       <>
                         <div
                           className="text-blue-500 cursor-pointer ml-6 pt-[4px] text-sm flex justify-end"
@@ -228,6 +229,34 @@ export const AddProductCard = ({
                           )}
                         </div>
                       </>
+                    )}
+
+                    {/* Show variant directly if there's only one variant */}
+                    {product?.variants?.length === 1 && (
+                      <div className="ml-8 mt-2 flex flex-col gap-2">
+                        {product.variants.map(
+                          (variant: IVariant, variantIndex: number) => (
+                            <VariantCard
+                              key={variant.id}
+                              variantIndex={variantIndex}
+                              variant={variant}
+                              toggleShowVariantDiscount={
+                                toggleShowVariantDiscount
+                              }
+                              handleVariantDiscountChange={
+                                handleVariantDiscountChange
+                              }
+                              handleVariantDiscountTypeChange={
+                                handleVariantDiscountTypeChange
+                              }
+                              handleRemoveVariant={handleRemoveVariant}
+                              moveVariant={moveVariant}
+                              product={product}
+                              productId={product.id}
+                            />
+                          )
+                        )}
+                      </div>
                     )}
                   </div>
                 )
