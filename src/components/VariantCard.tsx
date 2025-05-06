@@ -66,7 +66,7 @@ export const VariantCard = ({
 
   return (
     <div
-      key={variantIndex}
+      key={variant.id}
       className="flex w-full gap-4 h-[40px] items-center"
       ref={ref}
     >
