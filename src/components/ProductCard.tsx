@@ -70,10 +70,10 @@ export const ProductCard = ({
           </div>
         </div>
 
-        <div className="flex-2 w-[25%]">
+        <div className="flex items-center flex-shrink-0 min-w-[150px] max-w-[200px] w-full">
           {!product.showDiscount && (
             <button
-              className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full cursor-pointer"
+              className="bg-[#008060] text-white px-4 py-1 rounded-md w-full cursor-pointer"
               onClick={() => toggleShowDiscount(product.id)}
             >
               Add Discount

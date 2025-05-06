@@ -85,11 +85,10 @@ export const VariantCard = ({
         </div>
       </div>
 
-      <div className="flex items-center w-[25%]">
-        {/* Add Discount Button - Only show if discount isn't visible */}
+      <div className="flex items-center flex-shrink-0 min-w-[150px] max-w-[200px] w-full">
         {!variant.showDiscount && (
           <button
-            className="bg-[#008060] text-white px-5 py-0.5 rounded-md ml-2 w-full cursor-pointer"
+            className="bg-[#008060] text-white px-4 py-1 rounded-md w-full cursor-pointer"
             onClick={() => toggleShowVariantDiscount(product.id, variant.id)}
           >
             Add Discount
