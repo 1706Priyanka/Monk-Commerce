@@ -26,10 +26,13 @@ export const ProductCard = ({
   const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
     accept: "PRODUCT",
-    hover(item: { index: number }) {
-      moveProduct(item.index, productIndex);
-      item.index = productIndex;
-    },
+    hover(item: { id: number, productIndex: number }) {
+      if (item.productIndex !== productIndex) {
+        moveProduct(item.productIndex, productIndex);
+        item.productIndex = productIndex; 
+      }
+    }
+    
   });
 
   const [{ isDragging }, drag] = useDrag({
