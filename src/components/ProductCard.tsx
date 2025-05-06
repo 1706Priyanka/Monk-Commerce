@@ -55,7 +55,7 @@ export const ProductCard = ({
             className="w-[20px] h-[16px] mr-[12px] cursor-grab"
           />
           <span className="mr-2">{productIndex + 1}.</span>
-          <div className="flex bg-white p-1 shadow-sm rounded-sm w-full">
+          <div className="flex bg-white py-1 px-[10px] shadow-sm rounded-sm w-full">
             <input
               className="w-full outline-none placeholder-gray-400"
               value={product.title}
@@ -93,7 +93,7 @@ export const ProductCard = ({
                 }
               />
               <select
-                className="bg-white p-1 w-2/3 shadow-sm rounded-sm"
+                className="bg-white py-1 px-[10px] w-2/3 shadow-sm rounded-sm"
                 value={product.discountType}
                 onChange={(e) =>
                   handleDiscountTypeChange(
